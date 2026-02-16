@@ -1,0 +1,11 @@
+# Auto-deployed from GitHub on Railway
+# Environment: Production
+
+[build]
+  command = "npm install"
+
+[deploy]
+  startCommand = "npm start"
+  healthcheckPath = "/health"
+  restartPolicyType = "ON_FAILURE"
+  restartPolicyMaxRetries = 3

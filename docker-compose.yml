@@ -1,0 +1,63 @@
+version: '3.9'
+
+services:
+  # ─── MongoDB ───────────────────────────────────────
+  mongodb:
+    image: mongo:7.0
+    container_name: moda-mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: modapass123
+      MONGO_INITDB_DATABASE: moda_medidas
+    volumes:
+      - mongo_data:/data/db
+    ports:
+      - "27017:27017"
+    networks:
+      - moda-network
+
+  # ─── API Backend ───────────────────────────────────
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: moda-server
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 5000
+      MONGODB_URI: mongodb://admin:modapass123@mongodb:27017/moda_medidas?authSource=admin
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_EXPIRES_IN: 7d
+      CLIENT_URL: http://localhost:3000
+    volumes:
+      - ./server/uploads:/app/uploads
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongodb
+    networks:
+      - moda-network
+
+  # ─── Frontend ──────────────────────────────────────
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: moda-client
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    depends_on:
+      - server
+    networks:
+      - moda-network
+
+volumes:
+  mongo_data:
+    driver: local
+
+networks:
+  moda-network:
+    driver: bridge

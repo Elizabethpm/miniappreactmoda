@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(del \"C:\\\\Users\\\\Andy3\\\\Desktop\\\\Proyectos Portafolio arosado\\\\Mini App React Moda\\\\setup.ps1\")",
+      "Bash(node:*)",
+      "Bash(dir:*)"
+    ]
+  }
+}
