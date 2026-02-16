@@ -6,8 +6,9 @@ const getApiUrl = () => {
   if (import.meta.env.DEV) {
     return '/api'
   }
-  // En producción, usar la URL completa del backend
-  return import.meta.env.VITE_API_URL || 'http://localhost:3001'
+  // En producción, usar la URL completa del backend + /api
+  const backendUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001'
+  return `${backendUrl}/api`
 }
 
 // Instancia base de Axios
