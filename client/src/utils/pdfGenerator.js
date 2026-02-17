@@ -7,7 +7,9 @@ import { es } from 'date-fns/locale'
  * Genera una ficha técnica PDF profesional con las 4 secciones de medidas.
  * Secciones: Delanteras · Brazo · Pantalón/Falda · Traseras
  * Optimizado para caber en una sola página A4 cuando sea posible.
- *
+ * 
+ * @version 2.0.0 - Layout optimizado 2 columnas, pageBreak avoid, secciones vacías ocultas
+ * @updated 2026-02-17
  * @param {object} client  - Datos del cliente (name, phone, email, gender...)
  * @param {object} measure - Datos de la medición (upper, arms, pants, lower, fitType, ...)
  * @param {object} studio  - Datos del taller (name, phone, website) — opcional
