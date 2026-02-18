@@ -131,7 +131,7 @@ export function generatePDF(client, measure, studio = {}) {
       body:   toDoubleRows(rows),
       ...tableStyles(color, altBg),
     })
-    y = doc.lastAutoTable.finalY + 5
+    y = doc.lastAutoTable.finalY + 3 // Reducido de 5 a 3 para mejor spacing
   }
 
   // ══════════════════════════════════════════════════════
@@ -278,8 +278,8 @@ export function generatePDF(client, measure, studio = {}) {
   const allRows = [upperRows, armRows, pantsRows, lowerRows]
   const totalMeasures = allRows.flat().filter(([, v]) => v !== '—').length
 
-  ensureSpace(12)
-  y -= 2 // Reducir espacio antes del resumen
+  ensureSpace(10)
+  y -= 4 // Acercar más el resumen a la última sección
   
   doc.setFillColor(247, 246, 240)
   doc.setDrawColor(...LIGHT)
@@ -301,7 +301,7 @@ export function generatePDF(client, measure, studio = {}) {
   bits.forEach((txt, i) => {
     doc.text(txt, MARGIN + spacing * (i + 1), y + 5.2, { align: 'center' })
   })
-  y += 10
+  y += 8
 
   // ══════════════════════════════════════════════════════
   //  NOTAS TÉCNICAS
